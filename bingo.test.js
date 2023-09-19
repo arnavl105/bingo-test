@@ -9,7 +9,7 @@ test('Base case', () => {
 6 10 3 18 5
 1 12 20 15 19
   `;
-  expect(main(input)).toBe(true);
+  expect(main(input)[0]).toBe(true);
 });
 
 test('Diagonal Bingo', () => {
@@ -20,7 +20,7 @@ test('Diagonal Bingo', () => {
 6 10 3 18 5
 1 12 20 15 19`;
 
-  expect(main(input)).toBe(true);
+  expect(main(input)[0]).toBe(true);
 });
 
 test('Reverse Diagonal Bingo', () => {
@@ -31,7 +31,7 @@ test('Reverse Diagonal Bingo', () => {
 6 10 3 18 5
 1 12 20 15 19`;
 
-  expect(main(input)).toBe(true);
+  expect(main(input)[0]).toBe(true);
 });
 
 test('Horiztontal Bingo', () => {
@@ -42,7 +42,7 @@ test('Horiztontal Bingo', () => {
 18 10 3 18 5
 19 12 20 15 19`;
 
-  expect(main(input)).toBe(true);
+  expect(main(input)[0]).toBe(true);
 });
 
 test('Vertical Bingo', () => {
@@ -53,5 +53,5 @@ test('Vertical Bingo', () => {
 18 10 3 18 5
 19 12 20 15 19`;
 
-  expect(main(input)).toBe(true);
+  expect(main(input)[0]).toBe(true);
 });

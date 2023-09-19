@@ -46,13 +46,18 @@ const isBingo = (board) => {
 const main = (input) => {
 
 	const lines = input.split('\n');
-	const [numbers, ...board] = lines;
+	const numbers = lines[0];
+	const boards = lines.slice(1).join('\n').split('\n\n').map(line => line.split('\n'));		
+	const results = boards.map((board, i) => {
+	  const calledNumbersArray = numbers.split(',').map(Number);
+	  const bingoBoard = board.map(line => line.split(' ').map(Number));
+	  const crossedOutBoard = crossOutBoard(bingoBoard, calledNumbersArray);
 
-	const calledNumbersArray = numbers.split(',').map(Number);
-	const bingoBoard = board.map(line => line.split(' ').map(Number));
-	const crossedOutBoard = crossOutBoard(bingoBoard, calledNumbersArray);
+	  return isBingo(crossedOutBoard) 
+      });
 
-	return isBingo(crossedOutBoard)
+  return results;
+
 };
 
 module.exports = main;

@@ -15,8 +15,10 @@ function processFile(file) {
     });
 
     readInterface.on('close', () => {
-        const result = main(input);
-        console.log('Is it a bingo?', result);
+        const results = main(input);
+	results.forEach((result, i) => {
+	    console.log(`Board #${i + 1}: ${result ? 'Bingo' : 'No Bingo'}`);
+	});
     });
 }
 
