@@ -16,9 +16,15 @@ function processFile(file) {
 
     readInterface.on('close', () => {
         const results = main(input);
-	results.forEach((result, i) => {
-	    console.log(`Board #${i + 1}: ${result ? 'Bingo' : 'No Bingo'}`);
-	});
+	if (results.length === 1) {
+	    console.log(results[0] ? 'Bingo' : 'No Bingo');
+	    return;
+	} 
+        else {
+	  results.forEach((result, i) => {
+	      console.log(`Board #${i + 1}: ${result ? 'Bingo' : 'No Bingo'}`);
+	  });
+	}	
     });
 }
 
