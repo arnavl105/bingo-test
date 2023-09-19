@@ -1,4 +1,4 @@
-const main = require('./index.js');
+const main = require('./bingo.js');
 
 test('Base case', () => {
   const input = `

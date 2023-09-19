@@ -1,58 +1,28 @@
-const crossOutBoard = (board, numbers) => {
-	//make a board of zeros
-	const newBoard = board.map(row => row.map(cell => 0));
+const fs = require('fs');
+const readline = require('readline');
+const main = require('./bingo.js');
+const mainFile = process.argv[2];
 
-	//cross out the numbers
-	numbers.forEach(number => {
-		board.forEach((row, i) => {
-			row.forEach((cell, j) => {
-				if (cell === number) {
-					newBoard[i][j] = 1;
-				}
-			});
-		});
-	});
+function processFile(file) {
+    const readInterface = readline.createInterface({
+        input: fs.createReadStream(file),
+        console: false,
+    });
 
-	return newBoard;
-};
+    let input = '';
+    readInterface.on('line', (line) => {
+        input += line + '\n';
+    });
 
-const isHorizontalBingo = (board) => {
-	return board.some(row => row.every(cell => cell === 1));
-};
-
-const isVerticalBingo = (board) => {
-	const verticalBoard = board.map((row, i) => board.map(row => row[i]));
-	return isHorizontalBingo(verticalBoard);
-};
-
-const isDiagonalBingo = (board) => {
-	const diagonalBoard = board.map((row, i) => row[i]);
-	if (diagonalBoard.every(cell => cell === 1)) {
-		return true;
-	}
-	const diagonalBoard2 = board.map((row, i) => row[board.length - 1 - i]);
-	if (diagonalBoard2.every(cell => cell === 1)) {
-		return true;
-	}
-
-	return false;
-
-};
-
-const isBingo = (board) => {
-	return isHorizontalBingo(board) || isVerticalBingo(board) || isDiagonalBingo(board);
+    readInterface.on('close', () => {
+        const result = main(input);
+        console.log('Is it a bingo?', result);
+    });
 }
 
-const main = (input) => {
+if (mainFile) {
+    processFile(mainFile);
+} else {
+    console.log('Please provide a file as an argument.');
+}
 
-	const lines = input.split('\n');
-	const [numbers, ...board] = lines;
-
-	const calledNumbersArray = numbers.split(',').map(Number);
-	const bingoBoard = board.map(line => line.split(' ').map(Number));
-	const crossedOutBoard = crossOutBoard(bingoBoard, calledNumbersArray);
-
-	return isBingo(crossedOutBoard)
-};
-
-module.exports = main;
