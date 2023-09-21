@@ -46,8 +46,14 @@ const isBingo = (board) => {
 const main = (input) => {
 
 	const lines = input.split('\n');
+
+	if (lines.length <= 1) {
+		throw new Error('Invalid input');
+	}
+
 	const numbers = lines[0];
 	const boards = lines.slice(1).join('\n').split('\n\n').map(line => line.split('\n'));		
+
 	const results = boards.map((board, i) => {
 	  const calledNumbersArray = numbers.split(',').map(Number);
 	  const bingoBoard = board.map(line => line.split(' ').map(Number));

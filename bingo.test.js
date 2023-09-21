@@ -96,3 +96,11 @@ test('Multiple Boards - Test 2', () => {
 
   expect(main(input)).toEqual([true, false, true]);
 });
+
+test('Empty board', () => {
+  const input = `22,13,17,11,0`;
+
+  expect(() => {
+      main(input);
+  }).toThrow();
+});
